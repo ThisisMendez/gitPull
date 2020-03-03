@@ -14,3 +14,17 @@ router.('/').get((req, res) => {
         .then(person -> res.json(person))
         .catch(err => res.status(400).json('Error: ' + err)); 
 })
+
+router.('/').post((req, res) => {
+    const firstname = req.body.firstName;
+    const lastname = req.body.lastName; 
+
+    const newPerson = new Person({ 
+        firstname, 
+        lastname, 
+    })
+
+    newPerson.save()
+        .then(() => res.json('Person added!'))
+        .catch(err -> res.status(400).json('Error: ' + err))
+});
